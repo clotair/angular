@@ -285,11 +285,6 @@ export class Clavier{
     this.sup_espace(expression);
     console.log(expression);
     let le = expression.length-1;
-    if(expression[0]=='('&&expression[le]==')'){
-     expression.splice(0,1);
-     expression.splice(le,1);
-     le-=2;
-    }
     let indexpo=expression.lastIndexOf('(');
     let indexpf=expression.indexOf(')');
     let numpo=0;
@@ -308,17 +303,32 @@ export class Clavier{
         return "erreur";
       }
     }
-    while(indexpo!=-1){
+    numpo=0;
+    let i = 0;
       let u = Array();
-      u = expression.splice((indexpo+1),(indexpf-indexpo));
-      u.unshift('(');
-      console.log(u + 'valeur de u');
+      do{
+        if(expression[i]=='('){
+          if(numpo==0){
+            indexpo=i;
+          }
+          numpo++;
+        }else {
+          if(expression[i]==')'){
+          if(numpo==1){  
+          u = expression.splice((indexpo),(i-indexpo+1),'0'); 
+          u=u.splice(1,u.length-2);
+          expression[indexpo]=this.eval(u);
+          i=0;
+          
+          }
+        numpo--;
+        }
+      }
+      i++;
+      }while(expression.indexOf('(')!=-1&&i<expression.length);
+    
+      
       console.log(expression);
-
-      expression[indexpo]=this.eval( u);
-      indexpo=expression.lastIndexOf('(');
-      indexpf=expression.indexOf(')');
-    }
     for(let i = 0;i<expression.length;i++){ 
       if(expression[i]=='%'){
        let u = expression.splice(i,1);
