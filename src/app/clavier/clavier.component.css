@@ -1,0 +1,17 @@
+.clavier{
+    display: inline-block;
+    position: fixed;
+    top:27%;
+    left:30%;
+    width: 50%;
+    height: 20%;
+
+    margin: auto;
+    
+    text-align: right;
+}
+button{
+    width: 20%;
+    height: 30%;
+    
+}
