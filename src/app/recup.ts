@@ -383,7 +383,11 @@ export class Clavier{
         }
    
   }
-   return expression.pop();
+   if(expression[0]='NaN'){
+    return 'math error';
+   }else{
+    return expression.pop();
+   }
   }
   sup_espace(expressions:string[]){
     expressions.forEach((v,i)=>{
