@@ -383,7 +383,7 @@ export class Clavier{
         }
    
   }
-   if(expression[0]='NaN'){
+   if(expression[0]=='NaN'){
     return 'math error';
    }else{
     return expression.pop();
