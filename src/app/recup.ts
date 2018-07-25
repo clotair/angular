@@ -7,12 +7,12 @@ export class Clavier{
  expressionr:string='';
  expression:string='';
  prev_operation=false;
- prev_value
+ prev_value='';
  private prevVp;    
  onSelect(bouton:Bouton){
    if(this.prev_operation){
     this.prev_operation=false;
-     this.prev_value=this.expressionl;
+     
      switch(bouton.id){
       case 'diviser' :case 'mult': case 'pourcentage': case 'plus': case 'soust':
       this.expressionl = `${this.expressionl} ${bouton.value}`;
@@ -122,6 +122,7 @@ export class Clavier{
      this.expression=this.expressionl+this.expressionr;
      this.expressionl=this.eval(this.expression.split(' '));
      this.prev_operation=true;
+     this.prev_value=this.expressionl;
      this.expressionr='';
      break;
      default: 
@@ -257,10 +258,16 @@ export class Clavier{
      
     
     break;
+    case 'Delete':
+      this.expressionl='';
+      this.expressionr ='';
+      
+    break;
     case '=': case 'Enter':
     this.expression=this.expressionl+this.expressionr;  
     this.expressionl=this.eval(this.expression.split(' '));
     this.prev_operation=true;
+    this.prev_value=this.expressionl;
     this.expressionr='';
     break;
     case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9': case '0': 
